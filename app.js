@@ -26,8 +26,8 @@ const app = Vue.createApp({
         // 登録したタスクを削除する
         deleteTodo: function(todo) {
             const todoIndex = this.todos.indexOf(todo)
-            if(todoIndex) {
-                this.todos.splice(todo, 1)
+            if(todoIndex !== -1) {
+                this.todos.splice(todoIndex, 1)
             }
         },
         // 編集対象の要素を登録
@@ -45,7 +45,7 @@ const app = Vue.createApp({
         updateTodo: function(editTodos) {
             const editIndex = this.todos.indexOf(editTodos[0])
             if(editIndex) {
-                this.todos.splice(this.editIndex, 1, editTodos[0])
+                this.todos.splice(editIndex, 1, editTodos[0])
             }
         }
     }
