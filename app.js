@@ -47,6 +47,7 @@ const app = Vue.createApp({
             if(editIndex) {
                 this.todos.splice(editIndex, 1, editTodos[0])
             }
+            this.isEdit = false
         }
     }
 })
