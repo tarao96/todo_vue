@@ -8,12 +8,12 @@
 </head>
 <body>
     <div id="app">
-        <div class="container mt-10">
+        <div class="container mt-10 py-10">
             <h1 class="font-bold text-2xl text-center">Tailwind CSS ToDo</h1>
             <form @submit.prevent="createTodo()" v-if="!isEdit" class="rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xl mx-auto">
                 <div class="mb-4">
                     <label for="add" class="block text-gray-700 text-sm font-bold mb-2">新規追加</label>
-                    <input type="text" v-model="todoTitle" class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight text-gray-700 focus:outline-none" placeholder="新規投稿" />
+                    <input type="text" v-model="todoTitle" class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight text-gray-700 focus:outline-none" placeholder="新規追加" />
                 </div>
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
                     追加
@@ -22,7 +22,7 @@
 
             <form @submit.prevent="updateTodo(editTodos)" v-if="isEdit" class="rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xl mx-auto">
                 <div class="mb-4">
-                    <label for="add" class="block text-gray-700 text-sm font-bold mb-2">編集</label>
+                    <label for="add" class="block text-gray-700 text-sm font-bold mb-2">タスク編集</label>
                     <input type="text" v-model="editTodos[0].title" class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight text-gray-700 focus:outline-none" placeholder="新規投稿" />
                 </div>
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
@@ -30,7 +30,7 @@
                 </button>
             </form>
             
-            <table class="table-fixed w-full max-w-2xl mx-auto">
+            <table class="table-fixed w-full max-w-2xl mx-auto mb-10">
                 <thead>
                     <tr>
                         <th class="p-4">ToDo</th>
@@ -56,8 +56,12 @@
             </table>
         </div>
     </div>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue3 -->
     <script src="https://unpkg.com/vue@next"></script>
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="./app.js"></script>
 </body>
 </html>

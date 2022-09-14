@@ -1,3 +1,5 @@
+import { axios } from 'axios';
+
 function formattedDate() {
     const date = new Date()
     const formatDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
@@ -17,7 +19,7 @@ const app = Vue.createApp({
         // タスクを登録する
         createTodo: function() {
             this.todos.push({
-                id: 'todo-' + Date.now(),
+                id: 'todo-' + formattedDate(),
                 title: this.todoTitle,
                 dateTime: formattedDate()
             })
@@ -26,7 +28,10 @@ const app = Vue.createApp({
         // 登録したタスクを削除する
         deleteTodo: function(todo) {
             const todoIndex = this.todos.indexOf(todo)
-            if(todoIndex !== -1) {
+            const todoTitle = todo.title
+            const result = window.confirm(todoTitle + 'のタスクを削除しますか？')
+
+            if(todoIndex !== -1 && result) {
                 this.todos.splice(todoIndex, 1)
             }
         },
@@ -48,7 +53,18 @@ const app = Vue.createApp({
                 this.todos.splice(editIndex, 1, editTodos[0])
             }
             this.isEdit = false
+        },
+        // jsonデータからタスクを取得
+        fetchTodo: function() {
+            const self = this
+            axios.get("./todo.json").then((res) => {
+                self.todos = res.data
+            })
         }
+    },
+    mounted: function() {
+        // 取得しておいたjsonデータを表示
+        this.fetchTodo()
     }
 })
 
