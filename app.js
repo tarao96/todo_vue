@@ -9,11 +9,12 @@ const app = Vue.createApp({
         return {
             todos: [],
             todoTitle: "",
-            editTitle: "",
+            editTodos: [],
             isEdit: false
         }
     },
     methods: {
+        // タスクを登録する
         createTodo: function() {
             this.todos.push({
                 id: 'todo-' + Date.now(),
@@ -22,16 +23,30 @@ const app = Vue.createApp({
             })
             this.todoTitle = ""
         },
-        deleteTodo: function(todoId) {
-            const index = this.todos.indexOf(todoId)
-            this.todos.splice(todo, 1)
-        },
-        editTodo: function(todo) {
-            if(this.todos.indexOf(todo) !== -1) {
-                this.editTitle = todo.title
+        // 登録したタスクを削除する
+        deleteTodo: function(todo) {
+            const todoIndex = this.todos.indexOf(todo)
+            if(todoIndex) {
+                this.todos.splice(todo, 1)
             }
-
+        },
+        // 編集対象の要素を登録
+        edit: function(todo) {
+            if(this.todos.indexOf(todo) !== -1) {
+                this.editTodos.push({
+                    id: todo.id,
+                    title: todo.title,
+                    dateTime: formattedDate()
+                })
+            }
             this.isEdit = true
+        },
+        // 編集対象の要素を更新
+        updateTodo: function(editTodos) {
+            const editIndex = this.todos.indexOf(editTodos[0])
+            if(editIndex) {
+                this.todos.splice(this.editIndex, 1, editTodos[0])
+            }
         }
     }
 })
