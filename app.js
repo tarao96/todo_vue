@@ -15,6 +15,14 @@ const app = Vue.createApp({
             isEdit: false
         }
     },
+    watch: {
+        todos: {
+            handler: function(next) {
+                window.localStorage.setItem('todos', JSON.stringify(next))
+            },
+            deep: true
+        }
+    },
     methods: {
         // タスクを登録する
         createTodo: function() {
@@ -60,6 +68,12 @@ const app = Vue.createApp({
             axios.get("./todo.json").then((res) => {
                 self.todos = res.data
             })
+        }
+    },
+    created: function() {
+        const todos = window.localStorage.getItem('todos')
+        if(todos) {
+            this.todos = JSON.parse(todos)
         }
     },
     mounted: function() {
